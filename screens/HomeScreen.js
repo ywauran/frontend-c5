@@ -52,11 +52,19 @@ export default function HomeScreen() {
     if (!data) return;
     console.log("Predicting with data:", data.soilmoist, data.tempt, data.humi);
     try {
-      const response = await axios.post("http://192.168.1.14:5000/predict", {
-        soilMoisture: data.soilmoist,
-        temperature: data.tempt,
-        humidity: data.humi,
-      });
+      const response = await axios.post(
+        "http://192.168.1.14:5000/predict",
+        // {
+        //   soilMoisture: data.soilmoist,
+        //   temperature: data.tempt,
+        //   humidity: data.humi,
+        // },
+        {
+          soilMoisture: "Kurang",
+          temperature: "Cukup",
+          humidity: "Kurang",
+        }
+      );
       console.log("Predicted status:", response.data);
       setPredictStatus(response.data.prediction[0]);
     } catch (error) {
